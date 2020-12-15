@@ -1,0 +1,19 @@
+.listHeader > *:not(:last-child) {
+  margin-right: 2%;
+}
+
+.listHeaderVL > *:not(:last-child) {
+  margin-bottom: 1.3rem;
+}
+
+.listHeaderV > *:not(:last-child) {
+  margin-bottom: .5rem;
+}
+
+.daysCEDI .sapMInputBaseInner {
+  background-color: rgb(255, 255, 140);
+}
+
+.daysPOS .sapMInputBaseInner {
+  background-color: rgb(255, 219, 152);
+}

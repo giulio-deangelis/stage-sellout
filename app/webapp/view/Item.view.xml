@@ -1,0 +1,84 @@
+<mvc:View controllerName="training.listreport.client.app.controller.Item" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+  <App id="app">
+    <pages>
+      <f:DynamicPage id="page">
+        <f:title>
+          <f:DynamicPageTitle>
+            <f:actions>
+              <Button text="{i18n>Save}" press=".onSave" type="Emphasized" />
+            </f:actions>
+            <f:content>
+              <Button type="Back" press=".onBack" />
+            </f:content>
+          </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+          <f:DynamicPageHeader pinnable="true" class="sapUiSizeCompact" id="header">
+            <VBox class="listHeaderVL">
+              <HBox justifyContent="Center" class="listHeader">
+                <VBox>
+                  <Label text="{i18n>Name}" labelFor="nameInput" required="true" />
+                  <Input value="{Profile>/name}" id="nameInput" />
+                </VBox>
+                <VBox>
+                  <Label text="{i18n>Description}" labelFor="descriptionInput" required="true" />
+                  <Input value="{Profile>/description}" id="descriptionInput" />
+                </VBox>
+                <VBox>
+                  <Label text="{i18n>StdCal}" labelFor="stdCalInput" required="true" />
+                  <Input value="{Profile>/stdCal}" id="stdCalInput" />
+                </VBox>
+                <VBox>
+                  <Label text="{i18n>CreatedBy}" labelFor="createdByInput" />
+                  <Input value="{Profile>/createdBy}" id="createdByInput" editable="false" />
+                </VBox>
+                <VBox>
+                  <Label text="{i18n>CreatedAt}" labelFor="createdAtInput" />
+                  <DatePicker value="{path: 'Profile>/createdAt', formatter: '.formatter.formatEpochDate'}" id="createdAtInpt" displayFormat="dd/MM/yyyy" editable="false" />
+                </VBox>
+              </HBox>
+              <VBox class="listHeaderV">
+                <HBox justifyContent="Center">
+                  <Label text="{i18n>TotalDays}: {= ${Profile>/daysCEDI} + ${Profile>/daysPOS} }" />
+                </HBox>
+                <HBox justifyContent="Center" class="listHeader">
+                  <VBox>
+                    <Label text="{i18n>SelloutCEDI}" labelFor="daysCEDIInput" />
+                    <StepInput value="{Profile>/daysCEDI}" change=".onDaysChange" id="daysCEDIInput" width="6rem" />
+                  </VBox>
+                  <VBox>
+                    <Label text="{i18n>SelloutPOS}" labelFor="daysPOSInput" />
+                    <StepInput value="{Profile>/daysPOS}" change=".onDaysChange" id="daysPOSInput" width="6rem" />
+                  </VBox>
+                </HBox>
+              </VBox>
+            </VBox>
+          </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+          <VBox>
+            <Table id="itemTable" showSeparators="None" backgroundDesign="Transparent" class="sapUiSizeCompact" />
+            <viz:VizFrame vizType="line" uiConfig="{applicationSet:'fiori'}" legendVisible="false" width="100%" vizProperties="{
+                title: {visible: false}
+              }">
+              <viz:dataset>
+                <viz.data:FlattenedDataset id="chartDataSet">
+                  <viz.data:dimensions>
+                    <viz.data:DimensionDefinition axis="1" name="Day" value="{day}" />
+                  </viz.data:dimensions>
+                  <viz.data:measures>
+                    <viz.data:MeasureDefinition group="1" name="Value" value="{value}" />
+                  </viz.data:measures>
+                </viz.data:FlattenedDataset>
+              </viz:dataset>
+              <viz:feeds>
+                <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Value" />
+                <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Day" />
+              </viz:feeds>
+            </viz:VizFrame>
+          </VBox>
+        </f:content>
+      </f:DynamicPage>
+    </pages>
+  </App>
+</mvc:View>

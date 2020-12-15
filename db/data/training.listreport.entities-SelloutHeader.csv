@@ -1,0 +1,3 @@
+id;name;description;createdBy;createdAt;daysCEDI;daysPOS;stdCal
+1;Test;Test Header;Pippo;1607295600000;3;4;2
+2;Test2 ;Test Header 2;Pippo;1607295600000;2;7;4

@@ -1,0 +1,43 @@
+_schema-version: "3.1"
+
+ID: list-report
+description: List Report
+version: 1.0.0
+
+modules:
+- name: list-report-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: list-report-db
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+
+- name: list-report-app
+  type: html5
+  path: app
+  requires:
+    - name: srv-api
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+
+resources:
+- name: list-report-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+  properties:
+    hdi-service-name: ${service-name}
+
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install --production
+    - npx -p @sap/cds-dk cds build --production

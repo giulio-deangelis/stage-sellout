@@ -1,0 +1,100 @@
+<mvc:View controllerName="training.listreport.client.app.controller.Headers" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f">
+  <App id="app">
+    <pages>
+      <f:DynamicPage id="page">
+        <f:title>
+          <f:DynamicPageTitle>
+            <f:heading>
+              <Title text="{i18n>title}" />
+            </f:heading>
+            <f:actions>
+              <Button text="{i18n>CreateNewProfile}" press=".onCreateNewProfile" type="Ghost"/>
+            </f:actions>
+          </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+          <f:DynamicPageHeader pinnable="true" class="sapUiSizeCompact">
+            <HBox justifyContent="Center" class="listHeader" id="newRowForm">
+              <VBox>
+                <Label text="{i18n>Name}" labelFor="nameInput"/>
+                <Input value="{/name}" id="nameInput"/>
+              </VBox>
+              <VBox>
+                <Label text="{i18n>DaysCEDI}" labelFor="daysCEDIInput"/>
+                <StepInput value="{/daysCEDI}" id="daysCEDIInput" width="6rem"/>
+              </VBox>
+              <VBox>
+                <Label text="{i18n>DaysPOS}" labelFor="daysPOSInput"/>
+                <StepInput value="{/daysPOS}" id="daysPOSInput" width="6rem"/>
+              </VBox>
+              <VBox>
+                <Label text="{i18n>Description}" labelFor="descriptionInput"/>
+                <Input value="{/description}" id="descriptionInput"/>
+              </VBox>
+              <VBox>
+                <Label text="{i18n>CreatedBy}" labelFor="createdByInput"/>
+                <Input value="{/createdBy}" id="createdByInput"/>
+              </VBox>
+              <VBox>
+                <Label text="{i18n>CreatedAt}" labelFor="createdAtDatePicker"/>
+                <DatePicker value="{/createdAt}" id="createdAtDatePicker" displayFormat="dd/MM/yyyy"/>
+              </VBox>
+              <VBox>
+                <HBox height="100%"/>
+                <Button text="{i18n>Filter}" press="onFilter" type="Emphasized"/>
+              </VBox>
+            </HBox>
+          </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+          <Table items="{/headers}" id="headersList">
+            <items>
+              <ColumnListItem type="Navigation" press=".onItemPress">
+                <cells>
+                  <Text text="{name}"/>
+                  <Text text="{description}"/>
+                  <Text text="{daysCEDI}"/>
+                  <Text text="{daysPOS}"/>
+                  <Text text="{createdBy}"/>
+                  <Text text="{path: 'createdAt', formatter: '.formatter.formatEpochDate'}"/>
+                </cells>
+              </ColumnListItem>
+            </items>
+            <columns>
+              <Column>
+                <header>
+                  <Label text="{i18n>Name}"/>
+                </header>
+              </Column>
+              <Column>
+                <header>
+                  <Label text="{i18n>Description}"/>
+                </header>
+              </Column>
+              <Column>
+                <header>
+                  <Label text="{i18n>DaysCEDI}"/>
+                </header>
+              </Column>
+              <Column>
+                <header>
+                  <Label text="{i18n>DaysPOS}"/>
+                </header>
+              </Column>
+              <Column>
+                <header>
+                  <Label text="{i18n>CreatedBy}"/>
+                </header>
+              </Column>
+              <Column>
+                <header>
+                  <Label text="{i18n>CreatedAt}"/>
+                </header>
+              </Column>
+            </columns>
+          </Table>
+        </f:content>
+      </f:DynamicPage>
+    </pages>
+  </App>
+</mvc:View>
